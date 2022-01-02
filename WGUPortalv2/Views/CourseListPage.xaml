@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:WGUPortalv2.ViewModels" xmlns:model="clr-namespace:WGUPortalv2.Models"
+    x:DataType="viewmodels:CourseViewModel"
+    x:Name="CoursePage"
+    x:Class="WGUPortalv2.Views.CourseListPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:CourseViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ListView BackgroundColor="Transparent"
+              SelectionMode="Single"
+              CachingStrategy="RecycleElement"
+              ItemsSource="{Binding Course}"
+              HasUnevenRows="True"
+              SeparatorVisibility="None">
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Course">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Delete" 
+                                  Command="{Binding Source={x:Reference CoursePage}, Path=BindingContext.RemoveCommand}"
+                                  CommandParameter="{Binding .}"
+                                  IsDestructive="True"
+                                  />
+
+                        <MenuItem Text="Edit"
+                                  Command="{Binding Source={x:Reference CoursePage}, Path=BindingContext.EditCommand}"
+                                  CommandParameter="{Binding .}"
+                                  />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                       <Frame CornerRadius="20">
+                            <StackLayout>
+                                <Label Text="{Binding CourseTitle}"
+                                       HorizontalTextAlignment="Start" />
+                                <Label Text="{Binding TermId}"
+                                       HorizontalTextAlignment="End" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding CourseStartDate}"
+                                           HorizontalTextAlignment="Start" />
+                                    <Label Text="{Binding CourseEndDate}"
+                                           HorizontalTextAlignment="End" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+
+</ContentPage>

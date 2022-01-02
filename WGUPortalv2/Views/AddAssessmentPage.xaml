@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:WGUPortalv2.ViewModels" 
+    x:Class="WGUPortalv2.Views.AddAssessmentPage"
+    x:DataType="viewmodel:AddAssessmentViewModel">
+    <ContentPage.BindingContext>
+        <viewmodel:AddAssessmentViewModel />
+    </ContentPage.BindingContext>
+        <StackLayout VerticalOptions="Center">
+                <TableView Intent="Form"
+                           HasUnevenRows="True">
+                    <TableRoot>
+                        <TableSection Title="Assessment Information">
+
+                            <EntryCell Label="Assessment Title: "
+                                       Placeholder="Number or Title"
+                                       Text="{Binding AssessmentTitle}" />
+
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
+                                    <Label Text="Start Date: " VerticalTextAlignment="Center" />
+                                    <DatePicker Format="D" Date="{Binding AssessmentStartDate}" />
+                                </StackLayout>
+                            </ViewCell>
+
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
+                                    <Label Text="  End Date: " VerticalTextAlignment="Center" />
+                                    <DatePicker Format="D" Date="{Binding AssessmentEndDate}" />
+                                </StackLayout>
+                            </ViewCell>
+
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="Assessment Type: " VerticalTextAlignment="Center" />
+                                    <Picker Title="Make Selection" SelectedItem="{Binding AssessmentType}">
+                                        <Picker.Items>
+                                            <x:String>Objective Assessment</x:String>
+                                            <x:String>Performance Assessment</x:String>
+                                        </Picker.Items>
+                                    </Picker>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+
+                        <TableSection Title="Additional Information">
+                            <SwitchCell Text="Notifications Enabled" On="{Binding AssessmentNotification}" />
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+
+                <Button Padding="60,0"
+                        HorizontalOptions="Center"
+                        Text="Save"
+                        Command="{Binding SaveAssessmentCommand}">
+                </Button>
+            </StackLayout>
+</ContentPage>

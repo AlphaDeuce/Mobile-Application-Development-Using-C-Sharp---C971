@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodel="clr-namespace:WGUPortalv2.ViewModels"
+    x:Class="WGUPortalv2.Views.AddCoursePage"
+    x:DataType="viewmodel:AddCourseViewModel"
+    x:Name="CourseAddPage">
+    <ContentPage.BindingContext>
+        <viewmodel:AddCourseViewModel />
+    </ContentPage.BindingContext>
+
+        <StackLayout VerticalOptions="Center">
+            <TableView Intent="Form"
+                       HasUnevenRows="True">
+                <TableRoot>
+                    <TableSection Title="Course Information">
+                        <EntryCell Label="Course Title: "
+                                   Placeholder="Number or Title"
+                                   Text="{Binding CourseTitle}" />
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
+                                <Label Text="Start Date: " VerticalTextAlignment="Center" />
+                                <DatePicker Format="D" Date="{Binding CourseStartDate}" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
+                                <Label Text="  End Date: " VerticalTextAlignment="Center" />
+                                <DatePicker Format="D" Date="{Binding CourseEndDate}" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Course Status: " VerticalTextAlignment="Center" />
+                                <Picker Title="Select Status" SelectedItem="{Binding CourseStatus}">
+                                    <Picker.Items>
+                                        <x:String>In-Progress</x:String>
+                                        <x:String>Completed</x:String>
+                                        <x:String>Upcoming</x:String>
+                                        <x:String>Awaiting Approval</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                    <TableSection Title="Instructor Information">
+                        <EntryCell Label="Instructor Name: " Placeholder="Full Name" Text="{Binding CourseInstructorName}" />
+                        <EntryCell Label="Instructor Phone: " Placeholder="(999) 123-4567" Text="{Binding CourseInstructorPhone}" />
+                        <EntryCell Label="Instructor Email: " Placeholder="Instructor@wgu.edu" Text="{Binding CourseInstructorEmail}" />
+                    </TableSection>
+
+                    <TableSection Title="Additional Information">
+                        <EntryCell Label="Course Notes: " Placeholder="Notes" Text="{Binding CourseNotes}" />
+                        <SwitchCell Text="Notifications Enabled" On="{Binding CourseNotification}" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+            <Button Padding="60,0"
+                    HorizontalOptions="Center"
+                    Text="Save"
+                    Command="{Binding SaveCourseCommand}">
+            </Button>
+        </StackLayout>
+</ContentPage>

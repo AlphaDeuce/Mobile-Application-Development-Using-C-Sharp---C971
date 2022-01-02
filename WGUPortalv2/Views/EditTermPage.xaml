@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:WGUPortalv2.ViewModels" 
+    x:Class="WGUPortalv2.Views.EditTermPage"
+    x:Name="TermEditPage"
+    Title="Edit Term">
+
+    <ContentPage.BindingContext>
+        <viewmodel:EditTermViewModel />
+    </ContentPage.BindingContext>
+    
+
+        <StackLayout VerticalOptions="Center">
+                        
+            <TableView Intent="Form"
+                       HasUnevenRows="True"
+                       >
+                <TableRoot>
+                    <TableSection Title="Term Information">
+
+                        <EntryCell x:Name="TermTitleLabel"
+                                   Label="      Term Title: "
+                                   Placeholder="Number or Title"
+                                   Text=""
+                                   HorizontalTextAlignment="Start"/>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
+                                <Label Text="Start Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="TermStartDatePicker"
+                                    Format="D"  />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
+                                <Label Text="  End Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="TermEndDatePicker"
+                                    Format="D"  />
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Course(s)">
+                        <ViewCell>
+                            <ListView SelectionMode="Single"
+                                      CachingStrategy="RecycleElement"
+                                      x:Name="courseListView"
+                                      HasUnevenRows="True"
+                                      SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Delete"
+                                                    Command="{Binding Source={x:Reference TermEditPage}, Path=BindingContext.RemoveCourseCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    IsDestructive="True"
+                                                    />
+
+                                        <MenuItem Text="Edit"
+                                                    Command="{Binding Source={x:Reference TermEditPage}, Path=BindingContext.EditCourseCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    />
+                                    </ViewCell.ContextActions>
+                                            <Grid Padding="10">
+                                               <Frame CornerRadius="20">
+                                                    <StackLayout>
+                                                        <Label Text="{Binding CourseTitle}" FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center" />
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                            <Label Text="{Binding CourseStartDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                            <Label Text=" - " />
+                                                            <Label Text="{Binding CourseEndDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </Grid>
+                                      </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            </ListView>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+            <StackLayout>
+                <Label x:Name="noCourseLabel" Text="No Course(s) In This Term" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Padding="20"
+                    HorizontalOptions="Center"
+                    Text="Add Course"
+                    Command="{Binding AddCommand}"
+                    />
+
+            <Button Padding="20"
+                    HorizontalOptions="Center"
+                    Text="Save Term"
+                    Command="{Binding SaveCommand}">
+                 </Button>
+            </StackLayout>
+
+
+
+        </StackLayout>     
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ContentPage>

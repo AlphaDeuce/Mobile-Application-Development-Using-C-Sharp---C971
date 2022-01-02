@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:WGUPortalv2.ViewModels"
+    x:Class="WGUPortalv2.Views.TermDetailsPage"
+    x:Name="TDetailsPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:TermListViewModel />
+    </ContentPage.BindingContext>
+    
+            <StackLayout VerticalOptions="Center">
+                        
+            <TableView Intent="Form"
+                       HasUnevenRows="True"
+                       >
+                <TableRoot>
+                    <TableSection Title="Term Information">
+
+                        <EntryCell x:Name="TermTitleLabel"
+                                   Label="      Term Title: "
+                                   Placeholder="Number or Title"
+                                   IsEnabled="False"
+                                   HorizontalTextAlignment="Start"/>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
+                                <Label Text="Start Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="TermStartDatePicker"
+                                    Format="D" IsEnabled="False"/>
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
+                                <Label Text="  End Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="TermEndDatePicker"
+                                    Format="D"  IsEnabled="False"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Course(s)">
+                        <ViewCell> 
+                            <ListView SelectionMode="Single"
+                                      CachingStrategy="RecycleElement"
+                                      x:Name="courseListView"
+                                      HasUnevenRows="True"
+                                      SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                            <Grid Padding="10">
+                                               <Frame CornerRadius="20">
+                                                    <StackLayout>
+                                                        <Label Text="{Binding CourseTitle}" FontAttributes="Bold"
+                                                               HorizontalTextAlignment="Center" />
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                            <Label Text="{Binding CourseStartDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                            <Label Text=" - " />
+                                                            <Label Text="{Binding CourseEndDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </Grid>
+                                      </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            </ListView>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+
+            <StackLayout>
+                <Label x:Name="noCourseLabel" Text="No Course(s) In This Term" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+            </StackLayout>
+   </StackLayout>
+</ContentPage>
