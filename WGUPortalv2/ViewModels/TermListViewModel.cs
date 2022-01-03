@@ -18,6 +18,7 @@ namespace WGUPortalv2.ViewModels
         public TermListViewModel()
         {
             Term = new ObservableRangeCollection<Term>();
+            //Course = new ObservableRangeCollection<Course>();
 
             EditCommand = new AsyncCommand<Term>(Edit);
             RefreshCommand = new AsyncCommand(Refresh);
@@ -26,7 +27,6 @@ namespace WGUPortalv2.ViewModels
         }
 
         Term selectedTerm;
-
         public Term SelectedTerm
         {
             get => selectedTerm;
@@ -41,7 +41,7 @@ namespace WGUPortalv2.ViewModels
             }
         }
 
-       async Task Edit(Term term)
+        async Task Edit(Term term)
         {
             TermId = term.Id;
             var route = $"{nameof(EditTermPage)}";

@@ -13,6 +13,8 @@ namespace WGUPortalv2
                 typeof(TermDetailsPage));
             Routing.RegisterRoute(nameof(CourseDetailsPage),
                 typeof(CourseDetailsPage));
+            Routing.RegisterRoute(nameof(AssessmentDetailsPage),
+                typeof(AssessmentDetailsPage));
             Routing.RegisterRoute(nameof(AddTermPage),
                 typeof(AddTermPage));
             Routing.RegisterRoute(nameof(AddCoursePage),
@@ -21,6 +23,10 @@ namespace WGUPortalv2
                 typeof(AddAssessmentPage));
             Routing.RegisterRoute(nameof(EditTermPage),
                 typeof(EditTermPage));
+            Routing.RegisterRoute(nameof(EditCoursePage),
+                typeof(EditCoursePage));
+            Routing.RegisterRoute(nameof(EditAssessmentPage),
+                typeof(EditAssessmentPage));
         }
 
     }

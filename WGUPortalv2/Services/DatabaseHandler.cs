@@ -78,13 +78,27 @@ namespace WGUPortalv2.Services
             return terms;
         }
 
+        public static async Task UpdateCourse(int courseId, int termId, string title, DateTime startDate, DateTime endDate, string name, string phone, string email, string status, string notes, bool notify)
+        {
+            await Init();
+            
+            var course = new Course
+            {
+                Id = courseId,
+                TermId = termId,
+                CourseTitle = title,
+                CourseStartDate = startDate,
+                CourseEndDate = endDate,
+                CourseInstructorName = name,
+                CourseInstructorPhone = phone,
+                CourseInstructorEmail = email,
+                CourseNotes = notes,
+                CourseNotification = notify,
+                CourseStatus = status
+            };
 
-
- 
-
-
-
-
+            await db.UpdateAsync(course);
+        }
 
         public static async Task AddCourse(int termId, string title, DateTime startDate, DateTime endDate, string name, string phone, string email, string status, string notes, bool notify)
         {

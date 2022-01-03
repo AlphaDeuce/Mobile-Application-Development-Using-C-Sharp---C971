@@ -11,6 +11,8 @@ namespace WGUPortalv2.ViewModels
 {
     public class EditTermViewModel : ViewModelBase
     {
+        public AsyncCommand<Course> EditCourseCommand { get; }
+        public AsyncCommand<Course> RemoveCourseCommand { get; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
 
@@ -19,9 +21,39 @@ namespace WGUPortalv2.ViewModels
 
             Course = new ObservableRangeCollection<Course>();
 
+            EditCourseCommand = new AsyncCommand<Course>(Edit);
+            RemoveCourseCommand = new AsyncCommand<Course>(Remove);
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
 
+        }
+
+        Course selectedCourse;
+        public Course SelectedCourse
+        {
+            get => selectedCourse;
+            set
+            {
+                if (value != null)
+                {
+                    CourseId = value.Id;
+                    var route = $"{nameof(CourseDetailsPage)}";
+                    Shell.Current.GoToAsync(route);
+                }
+            }
+        }
+
+        async Task Edit(Course course)
+        {
+            CourseId = course.Id;
+            var route = $"{nameof(EditCoursePage)}";
+            await Shell.Current.GoToAsync(route);
+        }
+
+        async Task Remove(Course course)
+        {
+            await DatabaseHandler.RemoveCourse(course.Id);
+            await Refresh();
         }
 
         async Task Add()
@@ -34,8 +66,6 @@ namespace WGUPortalv2.ViewModels
         async Task Refresh()
         {
             IsBusy = true;
-
-            await Task.Delay(500);
 
             Course.Clear();
 
