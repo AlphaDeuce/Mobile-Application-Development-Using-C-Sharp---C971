@@ -43,6 +43,20 @@ namespace WGUPortalv2.Services
             await db.InsertAsync(term);
         }
 
+        public static async Task UpdateTerm(int termId, string title, DateTime startDate, DateTime endDate)
+        {
+            await Init();
+            var term = new Term
+            {
+                Id = termId,
+                TermTitle = title,
+                TermStartDate = startDate,
+                TermEndDate = endDate
+            };
+
+            await db.UpdateAsync(term);
+        }
+
         public static async Task RemoveTerm(int id)
         {
             await Init();
@@ -78,13 +92,27 @@ namespace WGUPortalv2.Services
             return terms;
         }
 
+        public static async Task UpdateCourse(int courseId, int termId, string title, DateTime startDate, DateTime endDate, string name, string phone, string email, string status, string notes, bool notify)
+        {
+            await Init();
+            
+            var course = new Course
+            {
+                Id = courseId,
+                TermId = termId,
+                CourseTitle = title,
+                CourseStartDate = startDate,
+                CourseEndDate = endDate,
+                CourseInstructorName = name,
+                CourseInstructorPhone = phone,
+                CourseInstructorEmail = email,
+                CourseNotes = notes,
+                CourseNotification = notify,
+                CourseStatus = status
+            };
 
-
- 
-
-
-
-
+            await db.UpdateAsync(course);
+        }
 
         public static async Task AddCourse(int termId, string title, DateTime startDate, DateTime endDate, string name, string phone, string email, string status, string notes, bool notify)
         {
@@ -158,6 +186,23 @@ namespace WGUPortalv2.Services
             };
 
             await db.InsertAsync(assessment);
+        }
+
+        public static async Task Update(int assessmentId, int courseId, string title, DateTime start, DateTime end, string type, bool notify)
+        {
+            await Init();
+            var assessment = new Assessment
+            {
+                Id = assessmentId,
+                CourseId = courseId,
+                AssessmentTitle = title,
+                AssessmentStartDate = start,
+                AssessmentEndDate = end,
+                AssessmentType = type,
+                NotificationEnabled = notify
+            };
+
+            await db.UpdateAsync(assessment);
         }
 
         public static async Task RemoveAssessment(int id)

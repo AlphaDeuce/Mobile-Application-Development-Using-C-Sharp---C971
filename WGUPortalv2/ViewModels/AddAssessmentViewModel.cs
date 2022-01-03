@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MvvmHelpers.Commands;
 using WGUPortalv2.Services;
 using Xamarin.Forms;
@@ -8,8 +7,6 @@ namespace WGUPortalv2.ViewModels
 {
     public class AddAssessmentViewModel : ViewModelBase
     {
-
-
         public AsyncCommand SaveAssessmentCommand { get; }
 
         public AddAssessmentViewModel()

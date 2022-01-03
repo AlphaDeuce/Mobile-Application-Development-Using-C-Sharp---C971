@@ -11,7 +11,6 @@
         <viewmodel:EditTermViewModel />
     </ContentPage.BindingContext>
     
-
         <StackLayout VerticalOptions="Center">
                         
             <TableView Intent="Form"
@@ -23,13 +22,13 @@
                         <EntryCell x:Name="TermTitleLabel"
                                    Label="      Term Title: "
                                    Placeholder="Number or Title"
-                                   Text=""
+                                   Text="{Binding TermTitle}"
                                    HorizontalTextAlignment="Start"/>
 
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
                                 <Label Text="Start Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="TermStartDatePicker"
+                                <DatePicker x:Name="TermStartDatePicker" Date="{Binding TermStartDate}"
                                     Format="D"  />
                             </StackLayout>
                         </ViewCell>
@@ -37,7 +36,7 @@
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
                                 <Label Text="  End Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="TermEndDatePicker"
+                                <DatePicker x:Name="TermEndDatePicker" Date="{Binding TermEndDate}"
                                     Format="D"  />
                             </StackLayout>
                         </ViewCell>
@@ -102,8 +101,8 @@
 
             <Button Padding="20"
                     HorizontalOptions="Center"
-                    Text="Save Term"
-                    Command="{Binding SaveCommand}">
+                    Text="Update Term"
+                    Command="{Binding UpdateTermCommand}">
                  </Button>
             </StackLayout>
 

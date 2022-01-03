@@ -5,9 +5,8 @@
     xmlns:viewmodels="clr-namespace:WGUPortalv2.ViewModels"
     x:Class="WGUPortalv2.Views.TermDetailsPage"
     x:Name="TDetailsPage">
-
     <ContentPage.BindingContext>
-        <viewmodels:TermListViewModel />
+        <viewmodels:TermDetailsViewModel />
     </ContentPage.BindingContext>
     
             <StackLayout VerticalOptions="Center">
@@ -22,7 +21,8 @@
                                    Label="      Term Title: "
                                    Placeholder="Number or Title"
                                    IsEnabled="False"
-                                   HorizontalTextAlignment="Start"/>
+                                   HorizontalTextAlignment="Start"
+                                   />
 
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
@@ -46,7 +46,8 @@
                                       CachingStrategy="RecycleElement"
                                       x:Name="courseListView"
                                       HasUnevenRows="True"
-                                      SeparatorVisibility="None">
+                                      SeparatorVisibility="None"
+                                      SelectedItem="{Binding SelectedCourse}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

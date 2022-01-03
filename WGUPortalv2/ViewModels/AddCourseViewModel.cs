@@ -1,24 +1,17 @@
-﻿using System;
-using System.IO;
+﻿using System.Threading.Tasks;
 using MvvmHelpers.Commands;
 using WGUPortalv2.Services;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using WGUPortalv2.Models;
-using WGUPortalv2.Views;
 
 namespace WGUPortalv2.ViewModels
 {
-   
     public class AddCourseViewModel : ViewModelBase
     {
-
         public AsyncCommand SaveCourseCommand { get; }
         
         public AddCourseViewModel()
         {
             SaveCourseCommand = new AsyncCommand(SaveCourse);
-            
         }
 
         async Task SaveCourse()
@@ -46,6 +39,5 @@ namespace WGUPortalv2.ViewModels
 
             await Shell.Current.GoToAsync("..");
         }
-
     }
 }

@@ -11,6 +11,8 @@ namespace WGUPortalv2.ViewModels
     {
 
         private static int _termId;
+        private static int _courseId;
+        private static int _assessmentId;
 
         // Term ViewModel Base Info:
         public ObservableRangeCollection<Term> Term { get; set; }
@@ -49,7 +51,8 @@ namespace WGUPortalv2.ViewModels
         public int courseId;
         public bool assessmentNotification;
 
-        public int CourseId { get => courseId; set => SetProperty(ref courseId, value); }
+        public static int AssessmentId { get { return _assessmentId; } set => _assessmentId = value; }
+        public static int CourseId { get { return _courseId; } set => _courseId = value; }
         public string AssessmentTitle { get => assessmentTitle; set => SetProperty(ref assessmentTitle, value); }
         public string AssessmentType { get => assessmentType; set => SetProperty(ref assessmentType, value); }
         public DateTime AssessmentStartDate { get => assessmentStartDate; set => SetProperty(ref assessmentStartDate, value); }

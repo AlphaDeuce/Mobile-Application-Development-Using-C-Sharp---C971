@@ -1,56 +1,108 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:WGUPortalv2.ViewModels" xmlns:model="clr-namespace:WGUPortalv2.Models"
-    x:Class="WGUPortalv2.Views.CourseDetailsPage">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:WGUPortalv2.ViewModels"
+    xmlns:model="clr-namespace:WGUPortalv2.Models"
+    x:Class="WGUPortalv2.Views.CourseDetailsPage"
+    x:Name="CDetailsPage">
 <ContentPage.BindingContext>
         <viewmodels:TermListViewModel />
 </ContentPage.BindingContext>
 
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
-    </ContentPage.ToolbarItems>-->
-
-    <ListView BackgroundColor="Transparent"
-              SelectionMode="Single"
-              CachingStrategy="RecycleElement"
-              ItemsSource="{Binding Course}"
-              HasUnevenRows="True"
-              SeparatorVisibility="None">
-
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:Course">
-                <ViewCell>
-                    <ViewCell.ContextActions>
-                        <MenuItem Command="{Binding Source={x:Reference CoursePage}, Path=BindingContext.RemoveCommand}"
-                                  CommandParameter="{Binding .}"
-                                  IsDestructive="True"
-                                  Text="Delete" />
-                        <MenuItem Text="Edit" />
-                    </ViewCell.ContextActions>
-                    <Grid>
-                       
-                            <StackLayout>
-                                <Label Text="{Binding CourseTitle}"
-                                       HorizontalTextAlignment="Center" />
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding CourseStartDate}"
-                                           HorizontalTextAlignment="Start" />
-                                    <Label Text="{Binding CourseEndDate}"
-                                           HorizontalTextAlignment="End" />
-                                </StackLayout>
-                                <Label Text="{Binding CourseInstructorName}" />
-                                <Label Text="{Binding CourseInstructorEmail}" />
-                                <Label Text="{Binding CourseInstructorPhone}" />
-                                <Label Text="{Binding CourseStatus}" />
-                                <Label Text="{Binding CourseNotification}" />
-                                <Label Text="{Binding CourseNotes}" />
-
+        <StackLayout VerticalOptions="Center">
+            <TableView Intent="Data"
+                       HasUnevenRows="True">
+                <TableRoot>
+                    <TableSection Title="Course Information">
+                        <EntryCell Label="Course Title: "
+                                   Placeholder="Number or Title"
+                                   x:Name="CourseTitle"
+                                   IsEnabled="False"
+                                   Text="{Binding CourseTitle}" />
+                        
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
+                                <Label Text="Start Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="CourseStart" IsEnabled="False" Format="D" Date="{Binding CourseStartDate}" />
                             </StackLayout>
-                       
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
+                                <Label Text="  End Date: " VerticalTextAlignment="Center" />
+                                <DatePicker x:Name="CourseEnd" IsEnabled="False"  Format="D" Date="{Binding CourseEndDate}" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="Course Status: " VerticalTextAlignment="Center" />
+                                <Picker Title="Select Status" IsEnabled="False"  SelectedItem="{Binding CourseStatus}" x:Name="CourseStatus">
+                                    <Picker.Items>
+                                        <x:String>In-Progress</x:String>
+                                        <x:String>Completed</x:String>
+                                        <x:String>Upcoming</x:String>
+                                        <x:String>Awaiting Approval</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                    <TableSection Title="Instructor Information">
+                        <EntryCell Label="Instructor Name: " IsEnabled="False"  Placeholder="Full Name" Text="{Binding CourseInstructorName}" x:Name="InstructorName"/>
+                        <EntryCell Label="Instructor Phone: " IsEnabled="False" Placeholder="(999) 123-4567" Text="{Binding CourseInstructorPhone}" x:Name="InstructorPhone"/>
+                        <EntryCell Label="Instructor Email: " IsEnabled="False"  Placeholder="Instructor@wgu.edu" Text="{Binding CourseInstructorEmail}" x:Name="InstructorEmail"/>
+                    </TableSection>
+
+                    <TableSection Title="Additional Information">
+                        <EntryCell Label="Course Notes: " IsEnabled="False"  Placeholder="Notes" Text="{Binding CourseNotes}" x:Name="CourseNotes"/>
+                        <SwitchCell Text="Notifications Enabled" IsEnabled="False"  On="{Binding CourseNotification}" x:Name="CourseNotification"/>
+                    </TableSection>
+                    <TableSection Title="Assessments(s)">
+                        <ViewCell> 
+                            <ListView SelectionMode="Single"
+                                      CachingStrategy="RecycleElement"
+                                      x:Name="assessmentListView"
+                                      HasUnevenRows="True"
+                                      SeparatorVisibility="None"
+                                      SelectedItem="{Binding SelectedAssessment}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                            <Grid Padding="10">
+                                               <Frame CornerRadius="20">
+                                                    <StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="{Binding AssessmentTitle}" FontAttributes="Bold" />
+                                                            <Label Text=" - " />
+                                                            <Label Text="{Binding AssessmentType}" />
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                            <Label Text="{Binding AssessmentStartDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                            <Label Text=" - " />
+                                                            <Label Text="{Binding AssessmentEndDate, StringFormat='{0:MMMM dd}'}"
+                                                                   HorizontalTextAlignment="Start" />
+                                                        </StackLayout>
+
+                                                    </StackLayout>
+                                                </Frame>
+                                            </Grid>
+                                      </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            </ListView>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+              <StackLayout>
+                <Label x:Name="noAssessmentLabel" Text="No Assessment(s) In This Course" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+
 </ContentPage>
