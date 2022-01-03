@@ -37,6 +37,5 @@ namespace WGUPortalv2.Views
                 return;
             }
         }
-
     }
 }

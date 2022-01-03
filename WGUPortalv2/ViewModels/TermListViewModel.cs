@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Threading.Tasks;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using WGUPortalv2.Models;
@@ -12,26 +10,19 @@ namespace WGUPortalv2.ViewModels
 {
     public class TermListViewModel : ViewModelBase
     {
-
         public AsyncCommand<Term> EditCommand { get; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
         public AsyncCommand<Term> RemoveCommand { get; }
-        
 
         public TermListViewModel()
         {
-
             Term = new ObservableRangeCollection<Term>();
-            
 
             EditCommand = new AsyncCommand<Term>(Edit);
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Term>(Remove);
-            
-
-
         }
 
         Term selectedTerm;
@@ -48,9 +39,7 @@ namespace WGUPortalv2.ViewModels
                     Shell.Current.GoToAsync(route);
                 }
             }
-
         }
-
 
        async Task Edit(Term term)
         {
@@ -62,8 +51,6 @@ namespace WGUPortalv2.ViewModels
         async Task Refresh()
         {
             IsBusy = true;
-
-            //await Task.Delay(500);
 
             Term.Clear();
 

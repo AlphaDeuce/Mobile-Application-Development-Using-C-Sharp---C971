@@ -11,7 +11,6 @@
         <viewmodel:EditTermViewModel />
     </ContentPage.BindingContext>
     
-
         <StackLayout VerticalOptions="Center">
                         
             <TableView Intent="Form"
