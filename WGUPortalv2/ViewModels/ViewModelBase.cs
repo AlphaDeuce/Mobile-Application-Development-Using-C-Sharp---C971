@@ -56,8 +56,8 @@ namespace WGUPortalv2.ViewModels
         public string AssessmentTitle { get => assessmentTitle; set => SetProperty(ref assessmentTitle, value); }
         public string AssessmentType { get => assessmentType; set => SetProperty(ref assessmentType, value); }
         public DateTime AssessmentStartDate { get => assessmentStartDate; set => SetProperty(ref assessmentStartDate, value); }
-        public DateTime AssessmentEndDate { get => AssessmentEndDate; set => SetProperty(ref assessmentEndDate, value); }
-        public bool AssessmentNotification { get => AssessmentNotification; set => SetProperty(ref assessmentNotification, value); }
+        public DateTime AssessmentEndDate { get => assessmentEndDate; set => SetProperty(ref assessmentEndDate, value); }
+        public bool AssessmentNotification { get => assessmentNotification; set => SetProperty(ref assessmentNotification, value); }
 
         
         

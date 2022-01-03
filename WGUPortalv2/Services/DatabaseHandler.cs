@@ -188,7 +188,7 @@ namespace WGUPortalv2.Services
             await db.InsertAsync(assessment);
         }
 
-        public static async Task Update(int assessmentId, int courseId, string title, DateTime start, DateTime end, string type, bool notify)
+        public static async Task UpdateAssessment(int assessmentId, int courseId, string title, DateTime start, DateTime end, string type, bool notify)
         {
             await Init();
             var assessment = new Assessment

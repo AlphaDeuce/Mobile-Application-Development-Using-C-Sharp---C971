@@ -43,6 +43,8 @@ namespace WGUPortalv2.Views
                 noAssessmentLabel.IsVisible = false;
                 return;
             }
+
+
         }
 
     }

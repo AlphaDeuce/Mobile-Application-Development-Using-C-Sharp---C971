@@ -42,7 +42,9 @@ namespace WGUPortalv2.ViewModels
                     var route = $"{nameof(CourseDetailsPage)}";
                     Shell.Current.GoToAsync(route);
                 }
+                SelectedCourse = null;
             }
+            
         }
 
         async Task Edit(Course course)

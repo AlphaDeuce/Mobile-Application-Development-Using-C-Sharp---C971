@@ -74,13 +74,7 @@
                                             <Grid Padding="10">
                                                <Frame CornerRadius="20">
                                                     <StackLayout>
-
-                                                        <StackLayout Orientation="Horizontal">
-                                                            <Label Text="{Binding AssessmentTitle}" FontAttributes="Bold" />
-                                                            <Label Text=" - " />
-                                                            <Label Text="{Binding AssessmentType}" />
-                                                        </StackLayout>
-
+                                                        <Label Text="{Binding AssessmentTitle}" FontAttributes="Bold" HorizontalOptions="Center" />
                                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                                             <Label Text="{Binding AssessmentStartDate, StringFormat='{0:MMMM dd}'}"
                                                                    HorizontalTextAlignment="Start" />
@@ -88,11 +82,16 @@
                                                             <Label Text="{Binding AssessmentEndDate, StringFormat='{0:MMMM dd}'}"
                                                                    HorizontalTextAlignment="Start" />
                                                         </StackLayout>
-
+                                                        <Label Text="{Binding AssessmentType}" HorizontalOptions="Center" />
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Notifications Enabled: " HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                            <Switch IsToggled="{Binding AssessmentNotification}" IsEnabled="False" HorizontalOptions="Center" />
+                                                        </StackLayout>
+                                                        
                                                     </StackLayout>
                                                 </Frame>
                                             </Grid>
-                                      </ViewCell>
+                                     </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             </ListView>
