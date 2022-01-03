@@ -43,6 +43,20 @@ namespace WGUPortalv2.Services
             await db.InsertAsync(term);
         }
 
+        public static async Task UpdateTerm(int termId, string title, DateTime startDate, DateTime endDate)
+        {
+            await Init();
+            var term = new Term
+            {
+                Id = termId,
+                TermTitle = title,
+                TermStartDate = startDate,
+                TermEndDate = endDate
+            };
+
+            await db.UpdateAsync(term);
+        }
+
         public static async Task RemoveTerm(int id)
         {
             await Init();

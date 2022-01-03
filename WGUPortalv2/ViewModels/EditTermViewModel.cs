@@ -13,6 +13,7 @@ namespace WGUPortalv2.ViewModels
     {
         public AsyncCommand<Course> EditCourseCommand { get; }
         public AsyncCommand<Course> RemoveCourseCommand { get; }
+        public AsyncCommand UpdateTermCommand { get; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
 
@@ -23,6 +24,7 @@ namespace WGUPortalv2.ViewModels
 
             EditCourseCommand = new AsyncCommand<Course>(Edit);
             RemoveCourseCommand = new AsyncCommand<Course>(Remove);
+            UpdateTermCommand = new AsyncCommand(Update);
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
 
@@ -60,6 +62,13 @@ namespace WGUPortalv2.ViewModels
         {
             var route = $"{nameof(AddCoursePage)}";
             await Shell.Current.GoToAsync(route);
+        }
+
+        async Task Update()
+        {
+            await DatabaseHandler.UpdateTerm(TermId, TermTitle, TermStartDate, TermEndDate);
+            await Shell.Current.DisplayAlert("", $"{TermTitle} Updated Successfully", "Ok");
+            await Shell.Current.GoToAsync("..");
         }
 
 
