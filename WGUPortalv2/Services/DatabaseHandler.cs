@@ -188,6 +188,23 @@ namespace WGUPortalv2.Services
             await db.InsertAsync(assessment);
         }
 
+        public static async Task Update(int assessmentId, int courseId, string title, DateTime start, DateTime end, string type, bool notify)
+        {
+            await Init();
+            var assessment = new Assessment
+            {
+                Id = assessmentId,
+                CourseId = courseId,
+                AssessmentTitle = title,
+                AssessmentStartDate = start,
+                AssessmentEndDate = end,
+                AssessmentType = type,
+                NotificationEnabled = notify
+            };
+
+            await db.UpdateAsync(assessment);
+        }
+
         public static async Task RemoveAssessment(int id)
         {
             await Init();
