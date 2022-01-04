@@ -4,7 +4,9 @@ using System.Linq;
 using WGUPortalv2.Models;
 using WGUPortalv2.Services;
 using WGUPortalv2.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+
 
 namespace WGUPortalv2.Views
 {
@@ -91,6 +93,23 @@ namespace WGUPortalv2.Views
                 await Shell.Current.DisplayAlert($"{CourseTitle.Text} Updated", null, "OK");
                 CourseMenuItem.Text = "Edit Course";
                 OnAppearing();
+            }
+
+        }
+
+        async void CourseNotesButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (CourseNotes.Text != "")
+            {
+                await Share.RequestAsync(new ShareTextRequest
+                {
+                    Text = CourseNotes.Text,
+                    Title = $"{CourseTitle.Text} Shared Notes"
+                });
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("", "Nothing to Share", "OK");
             }
 
         }

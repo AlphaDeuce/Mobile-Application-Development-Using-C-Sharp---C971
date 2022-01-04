@@ -13,6 +13,8 @@ namespace WGUPortalv2.ViewModels
   
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddTermCommand { get; }
+        public AsyncCommand DummyDataCommand { get; }
+        public AsyncCommand WipeDataCommand { get; }
  
         public TermListViewModel()
         {
@@ -20,6 +22,8 @@ namespace WGUPortalv2.ViewModels
 
             RefreshCommand = new AsyncCommand(Refresh);
             AddTermCommand = new AsyncCommand(AddTerm);
+            DummyDataCommand = new AsyncCommand(DummyLoad);
+            WipeDataCommand = new AsyncCommand(WipeData);
         }
 
         Term selectedTerm;
@@ -60,6 +64,23 @@ namespace WGUPortalv2.ViewModels
             await Shell.Current.GoToAsync(route);
         }
 
-     
+        async Task DummyLoad()
+        {
+            await DatabaseHandler.AddDummyData();
+            await Refresh();
+        }
+
+        async Task WipeData()
+        {
+            var ans = await Shell.Current.DisplayAlert("CONFIRM", "DELETE ALL LOCAL DATABSE RECORDS?", "Yes", "No");
+            if (ans == true)
+            {
+                await DatabaseHandler.WipeData();
+                await Refresh();
+            }
+
+
+                
+        }
     }
 }

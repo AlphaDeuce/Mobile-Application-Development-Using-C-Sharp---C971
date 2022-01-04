@@ -14,37 +14,41 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add Term" Command="{Binding AddTermCommand}"/>
     </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ListView BackgroundColor="Transparent"
+                  SelectionMode="Single"
+                  CachingStrategy="RecycleElement"
+                  ItemsSource="{Binding Term}"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None"
+                  SelectedItem="{Binding SelectedTerm}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:Term">
+                    <ViewCell>
+                        <Grid Padding="10">
+                           <Frame CornerRadius="20">
 
-    <ListView BackgroundColor="Transparent"
-              SelectionMode="Single"
-              CachingStrategy="RecycleElement"
-              ItemsSource="{Binding Term}"
-              HasUnevenRows="True"
-              SeparatorVisibility="None"
-              SelectedItem="{Binding SelectedTerm}">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="model:Term">
-                <ViewCell>
-                    <Grid Padding="10">
-                       <Frame CornerRadius="20">
-
-                            <StackLayout>
-                                <Label Text="{Binding TermTitle}" FontSize="Title"
-                                        HorizontalTextAlignment="Center" />
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Label Text="{Binding TermStartDate, StringFormat='{0:MMM dd, yyyy}'}"
-                                            HorizontalTextAlignment="Start" />
-                                    <Label Text=" - " />
-                                    <Label Text="{Binding TermEndDate, StringFormat='{0:MMM dd, yyyy}'}"
-                                            HorizontalTextAlignment="Start" />
-                                </StackLayout>
-                             </StackLayout>
-                        </Frame>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-    
+                                <StackLayout>
+                                    <Label Text="{Binding TermTitle}" FontSize="Title"
+                                            HorizontalTextAlignment="Center" />
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Label Text="{Binding TermStartDate, StringFormat='{0:MMM dd, yyyy}'}"
+                                                HorizontalTextAlignment="Start" />
+                                        <Label Text=" - " />
+                                        <Label Text="{Binding TermEndDate, StringFormat='{0:MMM dd, yyyy}'}"
+                                                HorizontalTextAlignment="Start" />
+                                    </StackLayout>
+                                 </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+             <Button Padding="25,0" HorizontalOptions="Center" Text="Load Eval Data" Command="{Binding DummyDataCommand}" />
+             <Button Padding="25,0" HorizontalOptions="Center" Text="Clear Database" Command="{Binding WipeDataCommand}" />
+        </StackLayout>
+    </StackLayout>
 
 </ContentPage>

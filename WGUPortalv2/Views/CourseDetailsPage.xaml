@@ -52,6 +52,9 @@
 
                     <TableSection Title="Additional Information">
                         <EntryCell Label="Course Notes: " Placeholder="Notes" Text="{Binding CourseNotes}" x:Name="CourseNotes" IsEnabled="False"/>
+                        <ViewCell>
+                            <Button Text="Share Notes" Padding="20" x:Name="CourseNotesButton" Clicked="CourseNotesButton_Clicked" HorizontalOptions="FillAndExpand" />
+                        </ViewCell>
                         <SwitchCell Text="Notifications Enabled" On="{Binding CourseNotification}" x:Name="CourseNotification" IsEnabled="False"/>
                     </TableSection>
 

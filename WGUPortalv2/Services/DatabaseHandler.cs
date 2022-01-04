@@ -5,7 +5,9 @@ using System.IO;
 using System.Threading.Tasks;
 using SQLite;
 using WGUPortalv2.Models;
+using Plugin.LocalNotifications;
 using Xamarin.Essentials;
+using System.Linq;
 
 namespace WGUPortalv2.Services
 {
@@ -13,6 +15,9 @@ namespace WGUPortalv2.Services
     {
         static SQLiteAsyncConnection db;
 
+        public static List<Course> courseList;
+        public static List<Assessment> assessmentList;
+        public static List<Term> termList;
 
         static async Task Init()
         {
@@ -26,6 +31,10 @@ namespace WGUPortalv2.Services
             await db.CreateTableAsync<Term>();
             await db.CreateTableAsync<Course>();
             await db.CreateTableAsync<Assessment>();
+
+            termList = await db.Table<Term>().ToListAsync();
+            courseList = await db.Table<Course>().ToListAsync();
+            assessmentList = await db.Table<Assessment>().ToListAsync();
 
         }
 
@@ -239,6 +248,68 @@ namespace WGUPortalv2.Services
             var assessments = await db.Table<Assessment>().ToListAsync();
 
             return assessments;
+        }
+
+        public static async Task AddDummyData()
+        {
+            await Init();
+
+            if (termList.Count() == 0)
+            {
+                var dummyTerm = new Term
+                {
+                    TermTitle = "Term One",
+                    TermStartDate = new DateTime(2022, 01, 01),
+                    TermEndDate = new DateTime(2022, 06, 30)
+                };
+                await db.InsertAsync(dummyTerm);
+
+
+                var dummyCourse = new Course
+                {
+                    TermId = dummyTerm.Id,
+                    CourseTitle = "Mobile Application - Eval",
+                    CourseStartDate = new DateTime(2022, 01, 4),
+                    CourseEndDate = new DateTime(2022, 01, 30),
+                    CourseInstructorName = "Thomas Klehn",
+                    CourseInstructorEmail = "tklehn@my.wgu.edu",
+                    CourseInstructorPhone = "931-933-1921",
+                    CourseStatus = "In-Progress",
+                    CourseNotes = "Dummy Notes Always Good to Share",
+                    CourseNotification = true
+                };
+                await db.InsertAsync(dummyCourse);
+
+                var dummyAssessment = new Assessment
+                {
+                    CourseId = dummyCourse.Id,
+                    AssessmentTitle = "Eval Assessment",
+                    AssessmentStartDate = new DateTime(2022, 01, 4),
+                    AssessmentEndDate = new DateTime(2022, 01, 30),
+                    AssessmentType = "Objective Assessment",
+                    NotificationEnabled = true
+                };
+                await db.InsertAsync(dummyAssessment);
+
+                var dummyAssessmentTwo = new Assessment
+                {
+                    AssessmentTitle = " Eval Assessment 2",
+                    AssessmentStartDate = new DateTime(2022, 01, 04),
+                    AssessmentEndDate = new DateTime(2022, 01, 30),
+                    CourseId = dummyCourse.Id,
+                    AssessmentType = "Performance Assessment",
+                    NotificationEnabled = true
+                };
+                await db.InsertAsync(dummyAssessmentTwo);
+            }
+        }
+
+        public static async Task WipeData()
+        {
+            await Init();
+            await db.DropTableAsync<Assessment>();
+            await db.DropTableAsync<Course>();
+            await db.DropTableAsync<Term>();
         }
 
     }
