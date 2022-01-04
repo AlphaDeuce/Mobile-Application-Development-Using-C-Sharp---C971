@@ -8,27 +8,29 @@
     <ContentPage.BindingContext>
         <viewmodels:TermDetailsViewModel />
     </ContentPage.BindingContext>
-    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit Term" Clicked="ToolbarItem_Clicked" x:Name="TermMenuItem"/>
+    </ContentPage.ToolbarItems>
             <StackLayout VerticalOptions="Center">
                         
-            <TableView Intent="Form"
+            <TableView Intent="Data"
                        HasUnevenRows="True"
-                       >
+                       x:Name="TermTable"
+                       IsEnabled="False">
                 <TableRoot>
                     <TableSection Title="Term Information">
 
                         <EntryCell x:Name="TermTitleLabel"
-                                   Label="      Term Title: "
+                                   Label="Term Title: "
                                    Placeholder="Number or Title"
-                                   IsEnabled="False"
-                                   HorizontalTextAlignment="Start"
+                                   HorizontalTextAlignment="Center"
                                    />
 
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
                                 <Label Text="Start Date: " VerticalTextAlignment="Center" />
                                 <DatePicker x:Name="TermStartDatePicker"
-                                    Format="D" IsEnabled="False"/>
+                                    Format="D" />
                             </StackLayout>
                         </ViewCell>
 
@@ -36,18 +38,23 @@
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
                                 <Label Text="  End Date: " VerticalTextAlignment="Center" />
                                 <DatePicker x:Name="TermEndDatePicker"
-                                    Format="D"  IsEnabled="False"/>
+                                    Format="D"  />
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="Course(s)">
-                        <ViewCell> 
+
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+                                         
                             <ListView SelectionMode="Single"
                                       CachingStrategy="RecycleElement"
                                       x:Name="courseListView"
                                       HasUnevenRows="True"
                                       SeparatorVisibility="None"
-                                      SelectedItem="{Binding SelectedCourse}">
+                                      SelectedItem="{Binding SelectedCourse}"
+                                      IsEnabled="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -70,11 +77,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             </ListView>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-
+                        
             <StackLayout>
                 <Label x:Name="noCourseLabel" Text="No Course(s) In This Term" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
             </StackLayout>

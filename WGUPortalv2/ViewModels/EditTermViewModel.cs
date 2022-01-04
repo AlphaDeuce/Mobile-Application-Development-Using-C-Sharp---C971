@@ -41,10 +41,12 @@ namespace WGUPortalv2.ViewModels
                     CourseId = value.Id;
                     var route = $"{nameof(CourseDetailsPage)}";
                     Shell.Current.GoToAsync(route);
+                    value = null;
                 }
-                SelectedCourse = null;
+                selectedCourse = value;
+                OnPropertyChanged();
             }
-            
+
         }
 
         async Task Edit(Course course)

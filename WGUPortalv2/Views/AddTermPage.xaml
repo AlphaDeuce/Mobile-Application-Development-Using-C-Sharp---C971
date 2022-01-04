@@ -36,7 +36,7 @@
             </TableView>
             <Button Padding="60,0"
                     HorizontalOptions="Center"
-                    Text="Save"
+                    Text="Save New Term"
                     Command="{Binding SaveTermCommand}">
             </Button>
         </StackLayout>                

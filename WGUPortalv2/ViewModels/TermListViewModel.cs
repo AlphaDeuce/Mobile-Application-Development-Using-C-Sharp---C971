@@ -10,7 +10,7 @@ namespace WGUPortalv2.ViewModels
 {
     public class TermListViewModel : ViewModelBase
     {
-        public AsyncCommand<Term> EditCommand { get; }
+        public AsyncCommand CourseEditCommand { get; }
         public AsyncCommand RefreshCommand { get; }
         public AsyncCommand AddCommand { get; }
         public AsyncCommand<Term> RemoveCommand { get; }
@@ -18,12 +18,29 @@ namespace WGUPortalv2.ViewModels
         public TermListViewModel()
         {
             Term = new ObservableRangeCollection<Term>();
-            //Course = new ObservableRangeCollection<Course>();
+            
 
-            EditCommand = new AsyncCommand<Term>(Edit);
+            CourseEditCommand = new AsyncCommand(CourseEdit);
             RefreshCommand = new AsyncCommand(Refresh);
             AddCommand = new AsyncCommand(Add);
             RemoveCommand = new AsyncCommand<Term>(Remove);
+        }
+
+        Assessment selectedAssessment;
+        public Assessment SelectedAssessment
+        {
+            get => selectedAssessment;
+            set
+            {
+                if (value != null)
+                {
+                    AssessmentId = value.Id;
+                    var route = $"{nameof(AssessmentDetailsPage)}";
+                    Shell.Current.GoToAsync(route);
+                }
+                selectedAssessment = value;
+                OnPropertyChanged();
+            }
         }
 
         Term selectedTerm;
@@ -38,13 +55,14 @@ namespace WGUPortalv2.ViewModels
                     var route = $"{nameof(TermDetailsPage)}";
                     Shell.Current.GoToAsync(route);
                 }
+                selectedTerm = value;
+                OnPropertyChanged();
             }
         }
 
-        async Task Edit(Term term)
+        async Task CourseEdit()
         {
-            TermId = term.Id;
-            var route = $"{nameof(EditTermPage)}";
+            var route = $"{nameof(EditCoursePage)}";
             await Shell.Current.GoToAsync(route);
         }
 

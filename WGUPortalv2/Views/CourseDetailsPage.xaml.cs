@@ -12,6 +12,7 @@ namespace WGUPortalv2.Views
     {
         private IEnumerable<Assessment> assessmentList;
         private int courseId = ViewModelBase.CourseId;
+        private int termId = ViewModelBase.TermId;
         Course selectedCourse;
 
         public CourseDetailsPage()
@@ -47,5 +48,29 @@ namespace WGUPortalv2.Views
 
         }
 
+        async void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (CourseMenuItem.Text == "Edit Course")
+            {
+                CourseTable.IsEnabled = true;
+                CourseMenuItem.Text = "Save Changes";
+            }
+            else if (CourseMenuItem.Text == "Save Changes")
+            {
+                CourseTable.IsEnabled = false;
+                await DatabaseHandler.UpdateCourse(courseId,
+                    termId,
+                    CourseTitle.Text,
+                    CourseStart.Date,
+                    CourseEnd.Date,
+                    InstructorName.Text,
+                    InstructorPhone.Text,
+                    InstructorEmail.Text,
+                    CourseStatus.SelectedItem.ToString(),
+                    CourseNotes.Text, CourseNotification.On);
+                await Shell.Current.DisplayAlert($"{CourseTitle.Text} Updated", null, "OK");
+            }
+
+        }
     }
 }

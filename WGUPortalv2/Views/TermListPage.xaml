@@ -12,7 +12,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
+        <ToolbarItem Text="Add Term" Command="{Binding AddCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ListView BackgroundColor="Transparent"
@@ -25,7 +25,7 @@
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="model:Term">
                 <ViewCell>
-                    <ViewCell.ContextActions>
+                    <!--<ViewCell.ContextActions>
                         <MenuItem Text="Delete" 
                                   Command="{Binding Source={x:Reference TListPage}, Path=BindingContext.RemoveCommand}"
                                   CommandParameter="{Binding .}"
@@ -34,7 +34,7 @@
                         <MenuItem Text="Edit"
                                   Command="{Binding Source={x:Reference TListPage}, Path=BindingContext.EditCommand}"
                                   CommandParameter="{Binding .}" />
-                    </ViewCell.ContextActions>
+                    </ViewCell.ContextActions>-->
                     <Grid Padding="10">
                        <Frame CornerRadius="20">
 

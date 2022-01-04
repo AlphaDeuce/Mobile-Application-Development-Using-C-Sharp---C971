@@ -7,12 +7,16 @@
     x:Class="WGUPortalv2.Views.CourseDetailsPage"
     x:Name="CDetailsPage">
 <ContentPage.BindingContext>
-        <viewmodels:TermListViewModel />
+        <viewmodels:CourseDetailsViewModel />
 </ContentPage.BindingContext>
-
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="Edit Course" Clicked="ToolbarItem_Clicked" x:Name="CourseMenuItem"/>
+        </ContentPage.ToolbarItems>
         <StackLayout VerticalOptions="Center">
             <TableView Intent="Data"
-                       HasUnevenRows="True">
+                       HasUnevenRows="True"
+                       x:Name="CourseTable"
+                       IsEnabled="False">
                 <TableRoot>
                     <TableSection Title="Course Information">
                         <EntryCell Label="Course Title: "
@@ -60,8 +64,11 @@
                         <EntryCell Label="Course Notes: " IsEnabled="False"  Placeholder="Notes" Text="{Binding CourseNotes}" x:Name="CourseNotes"/>
                         <SwitchCell Text="Notifications Enabled" IsEnabled="False"  On="{Binding CourseNotification}" x:Name="CourseNotification"/>
                     </TableSection>
-                    <TableSection Title="Assessments(s)">
-                        <ViewCell> 
+
+                    <TableSection Title="Assessments(s)" />
+
+                </TableRoot>
+            </TableView>
                             <ListView SelectionMode="Single"
                                       CachingStrategy="RecycleElement"
                                       x:Name="assessmentListView"
@@ -95,10 +102,6 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             </ListView>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
               <StackLayout>
                 <Label x:Name="noAssessmentLabel" Text="No Assessment(s) In This Course" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
             </StackLayout>

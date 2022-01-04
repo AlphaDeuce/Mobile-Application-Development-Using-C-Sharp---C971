@@ -37,5 +37,10 @@ namespace WGUPortalv2.Views
                 return;
             }
         }
+
+        void courseListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace WGUPortalv2.Views
         public TermDetailsPage()
         {
             InitializeComponent();
-
+            
         }
 
         protected override async void OnAppearing()
@@ -35,6 +35,31 @@ namespace WGUPortalv2.Views
                 courseListView.ItemsSource = courseList;
                 noCourseLabel.IsVisible = false;
                 return;
+            }
+
+            
+        }
+
+        async void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (TermMenuItem.Text == "Edit Term")
+            {
+                TermTable.IsEnabled = true;
+
+                TermMenuItem.Text = "Save Changes";
+
+            }
+            else if (TermMenuItem.Text == "Save Changes")
+            {
+
+                TermTable.IsEnabled = false;
+                await DatabaseHandler.UpdateTerm(termId,
+                                                TermTitleLabel.Text,
+                                                TermStartDatePicker.Date,
+                                                TermEndDatePicker.Date);
+                await Shell.Current.DisplayAlert($"{TermTitleLabel.Text} Updated",null ,"OK");
+                TermMenuItem.Text = "Edit Term";
+                OnAppearing();
             }
         }
     }

@@ -9,7 +9,7 @@ namespace WGUPortalv2.ViewModels
 
     public class ViewModelBase : BaseViewModel
     {
-
+        //TODO:: Take a look at how these protection modifiers (private/public) affect the entire code and the properties
         private static int _termId;
         private static int _courseId;
         private static int _assessmentId;
@@ -17,12 +17,12 @@ namespace WGUPortalv2.ViewModels
         // Term ViewModel Base Info:
         public ObservableRangeCollection<Term> Term { get; set; }
 
-        string termTitle;
-        DateTime termStartDate, termEndDate;
+        private static string termTitle;
+        private static DateTime termStartDate, termEndDate;
 
-        public string TermTitle { get => termTitle; set => SetProperty(ref termTitle, value); }
-        public DateTime TermStartDate { get => termStartDate; set => SetProperty(ref termStartDate, value); }
-        public DateTime TermEndDate { get => termEndDate; set => SetProperty(ref termEndDate, value); }
+        public static string TermTitle { get => termTitle; set => termTitle = value; }
+        public static DateTime TermStartDate { get => termStartDate; set => termStartDate = value; }
+        public static DateTime TermEndDate { get => termEndDate; set => termEndDate = value; }
 
         // Course ViewModel Base Info:
         public ObservableRangeCollection<Course> Course { get; set; }

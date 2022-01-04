@@ -43,7 +43,8 @@
                     </TableSection>
                     <TableSection Title="Course(s)">
                         <ViewCell>
-                            <ListView SelectionMode="Single"
+                            <ListView ItemTapped="courseListView_ItemTapped"
+                                      
                                       CachingStrategy="RecycleElement"
                                       x:Name="courseListView"
                                       HasUnevenRows="True"
@@ -51,7 +52,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
-                                    <ViewCell.ContextActions>
+                                    <!--<ViewCell.ContextActions>
                                         <MenuItem Text="Delete"
                                                     Command="{Binding Source={x:Reference TermEditPage}, Path=BindingContext.RemoveCourseCommand}"
                                                     CommandParameter="{Binding .}"
@@ -62,7 +63,7 @@
                                                     Command="{Binding Source={x:Reference TermEditPage}, Path=BindingContext.EditCourseCommand}"
                                                     CommandParameter="{Binding .}"
                                                     />
-                                    </ViewCell.ContextActions>
+                                    </ViewCell.ContextActions>-->
                                             <Grid Padding="10">
                                                <Frame CornerRadius="20">
                                                     <StackLayout>
