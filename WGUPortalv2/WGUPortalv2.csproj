@@ -28,4 +28,16 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\EditCourseViewModel.cs" />
+    <Compile Remove="ViewModels\EditTermViewModel.cs" />
+    <Compile Remove="Views\EditAssessmentPage.xaml.cs" />
+    <Compile Remove="Views\EditCoursePage.xaml.cs" />
+    <Compile Remove="Views\EditTermPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\EditAssessmentPage.xaml" />
+    <EmbeddedResource Remove="Views\EditCoursePage.xaml" />
+    <EmbeddedResource Remove="Views\EditTermPage.xaml" />
+  </ItemGroup>
 </Project>
