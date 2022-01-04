@@ -97,7 +97,7 @@ namespace WGUPortalv2.Views
 
         }
 
-        async void CourseNotesButton_Clicked(System.Object sender, System.EventArgs e)
+        async void CourseNotesButton_Clicked(object sender, EventArgs e)
         {
             if (CourseNotes.Text != "")
             {

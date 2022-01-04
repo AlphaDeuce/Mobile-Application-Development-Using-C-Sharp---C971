@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
 using SQLite;
 using WGUPortalv2.Models;
-using Plugin.LocalNotifications;
-using Xamarin.Essentials;
 using System.Linq;
 
 namespace WGUPortalv2.Services
@@ -21,8 +18,6 @@ namespace WGUPortalv2.Services
 
         static async Task Init()
         {
-            //if (db != null)
-            //    return;
 
             var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "WGU.db3");
 

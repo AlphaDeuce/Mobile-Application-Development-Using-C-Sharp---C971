@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
 using Plugin.LocalNotifications;
 using WGUPortalv2.Models;
 using WGUPortalv2.Services;
@@ -16,7 +14,6 @@ namespace WGUPortalv2.Views
         public TermListPage()
         {
             InitializeComponent();
-
         }
 
         protected override async void OnAppearing()
@@ -26,7 +23,7 @@ namespace WGUPortalv2.Views
 
             if (pushNotification == true)
             {
-                pushNotification = false;
+                //pushNotification = false;
                 int courseId = 0;
                 foreach (Course course in DatabaseHandler.courseList)
                 {
@@ -47,9 +44,9 @@ namespace WGUPortalv2.Views
                     if (assessment.NotificationEnabled == true)
                     {
                         if (assessment.AssessmentStartDate == DateTime.Today)
-                            CrossLocalNotifications.Current.Show("Assessment Notification", $"{assessment.AssessmentTitle} begins today!", assessmentId);
+                            CrossLocalNotifications.Current.Show("Assessment Notification", $"{assessment.AssessmentTitle} begins today!", assessmentId, DateTime.Now.AddSeconds(5));
                         if (assessment.AssessmentEndDate == DateTime.Today)
-                            CrossLocalNotifications.Current.Show("Assessment Notification", $"{assessment.AssessmentTitle} ends today!", assessmentId);
+                            CrossLocalNotifications.Current.Show("Assessment Notification", $"{assessment.AssessmentTitle} ends today!", assessmentId, DateTime.Now.AddSeconds(5));
                     }
                 }
             }

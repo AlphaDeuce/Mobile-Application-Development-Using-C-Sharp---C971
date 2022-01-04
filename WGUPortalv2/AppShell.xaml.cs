@@ -21,12 +21,6 @@ namespace WGUPortalv2
                 typeof(AddCoursePage));
             Routing.RegisterRoute(nameof(AddAssessmentPage),
                 typeof(AddAssessmentPage));
-            Routing.RegisterRoute(nameof(EditTermPage),
-                typeof(EditTermPage));
-            Routing.RegisterRoute(nameof(EditCoursePage),
-                typeof(EditCoursePage));
-            Routing.RegisterRoute(nameof(EditAssessmentPage),
-                typeof(EditAssessmentPage));
         }
 
     }

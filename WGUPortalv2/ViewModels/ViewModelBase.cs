@@ -9,7 +9,7 @@ namespace WGUPortalv2.ViewModels
 
     public class ViewModelBase : BaseViewModel
     {
-        //TODO:: Take a look at how these protection modifiers (private/public) affect the entire code and the properties
+        
         private static int _termId;
         private static int _courseId;
         private static int _assessmentId;

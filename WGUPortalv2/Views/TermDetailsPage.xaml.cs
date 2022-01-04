@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WGUPortalv2.Models;
 using WGUPortalv2.Services;
@@ -41,7 +42,7 @@ namespace WGUPortalv2.Views
             }
         }
 
-        async void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
+        async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             if (TermMenuItem.Text == "Edit Term")
             {

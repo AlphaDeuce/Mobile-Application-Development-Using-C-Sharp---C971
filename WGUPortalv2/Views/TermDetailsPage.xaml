@@ -11,8 +11,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit Term" Clicked="ToolbarItem_Clicked" x:Name="TermMenuItem"/>
     </ContentPage.ToolbarItems>
-            <StackLayout VerticalOptions="Center">
-                        
+            <StackLayout VerticalOptions="Center">      
             <TableView Intent="Data"
                        HasUnevenRows="True"
                        x:Name="TermTable" >
