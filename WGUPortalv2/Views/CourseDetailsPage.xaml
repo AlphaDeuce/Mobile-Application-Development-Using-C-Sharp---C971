@@ -13,36 +13,27 @@
             <ToolbarItem Text="Edit Course" Clicked="ToolbarItem_Clicked" x:Name="CourseMenuItem"/>
         </ContentPage.ToolbarItems>
         <StackLayout VerticalOptions="Center">
-            <TableView Intent="Data"
-                       HasUnevenRows="True"
-                       x:Name="CourseTable"
-                       IsEnabled="False">
+            <TableView Intent="Data" HasUnevenRows="True" x:Name="CourseTable" >
                 <TableRoot>
                     <TableSection Title="Course Information">
-                        <EntryCell Label="Course Title: "
-                                   Placeholder="Number or Title"
-                                   x:Name="CourseTitle"
-                                   IsEnabled="False"
-                                   Text="{Binding CourseTitle}" />
-                        
+                        <EntryCell Label="Course Title: " Placeholder="Number or Title"  x:Name="CourseTitle" Text="{Binding CourseTitle}" IsEnabled="False"/>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
                                 <Label Text="Start Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="CourseStart" IsEnabled="False" Format="D" Date="{Binding CourseStartDate}" />
+                                <DatePicker x:Name="CourseStart" Format="D" Date="{Binding CourseStartDate}" IsEnabled="False" />
                             </StackLayout>
                         </ViewCell>
-
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
                                 <Label Text="  End Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="CourseEnd" IsEnabled="False"  Format="D" Date="{Binding CourseEndDate}" />
+                                <DatePicker x:Name="CourseEnd" Format="D" Date="{Binding CourseEndDate}" IsEnabled="False"/>
                             </StackLayout>
                         </ViewCell>
 
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                 <Label Text="Course Status: " VerticalTextAlignment="Center" />
-                                <Picker Title="Select Status" IsEnabled="False"  SelectedItem="{Binding CourseStatus}" x:Name="CourseStatus">
+                                <Picker Title="Select Status" SelectedItem="{Binding CourseStatus}" x:Name="CourseStatus" IsEnabled="False">
                                     <Picker.Items>
                                         <x:String>In-Progress</x:String>
                                         <x:String>Completed</x:String>
@@ -53,28 +44,20 @@
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
-
                     <TableSection Title="Instructor Information">
-                        <EntryCell Label="Instructor Name: " IsEnabled="False"  Placeholder="Full Name" Text="{Binding CourseInstructorName}" x:Name="InstructorName"/>
-                        <EntryCell Label="Instructor Phone: " IsEnabled="False" Placeholder="(999) 123-4567" Text="{Binding CourseInstructorPhone}" x:Name="InstructorPhone"/>
-                        <EntryCell Label="Instructor Email: " IsEnabled="False"  Placeholder="Instructor@wgu.edu" Text="{Binding CourseInstructorEmail}" x:Name="InstructorEmail"/>
+                        <EntryCell Label="Instructor Name: " Placeholder="Full Name" Text="{Binding CourseInstructorName}" x:Name="InstructorName" IsEnabled="False"/>
+                        <EntryCell Label="Instructor Phone: " Placeholder="(999) 123-4567" Text="{Binding CourseInstructorPhone}" x:Name="InstructorPhone" IsEnabled="False"/>
+                        <EntryCell Label="Instructor Email: " Placeholder="Instructor@wgu.edu" Text="{Binding CourseInstructorEmail}" x:Name="InstructorEmail" IsEnabled="False"/>
                     </TableSection>
 
                     <TableSection Title="Additional Information">
-                        <EntryCell Label="Course Notes: " IsEnabled="False"  Placeholder="Notes" Text="{Binding CourseNotes}" x:Name="CourseNotes"/>
-                        <SwitchCell Text="Notifications Enabled" IsEnabled="False"  On="{Binding CourseNotification}" x:Name="CourseNotification"/>
+                        <EntryCell Label="Course Notes: " Placeholder="Notes" Text="{Binding CourseNotes}" x:Name="CourseNotes" IsEnabled="False"/>
+                        <SwitchCell Text="Notifications Enabled" On="{Binding CourseNotification}" x:Name="CourseNotification" IsEnabled="False"/>
                     </TableSection>
 
-                    <TableSection Title="Assessments(s)" />
-
-                </TableRoot>
-            </TableView>
-                            <ListView SelectionMode="Single"
-                                      CachingStrategy="RecycleElement"
-                                      x:Name="assessmentListView"
-                                      HasUnevenRows="True"
-                                      SeparatorVisibility="None"
-                                      SelectedItem="{Binding SelectedAssessment}">
+                    <TableSection Title="Assessments(s)">
+                        <ViewCell>
+                            <ListView SelectionMode="Single" CachingStrategy="RecycleElement" x:Name="assessmentListView" HasUnevenRows="True" SeparatorVisibility="None" SelectedItem="{Binding SelectedAssessment}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -83,18 +66,11 @@
                                                     <StackLayout>
                                                         <Label Text="{Binding AssessmentTitle}" FontAttributes="Bold" HorizontalOptions="Center" />
                                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                                            <Label Text="{Binding AssessmentStartDate, StringFormat='{0:MMMM dd}'}"
-                                                                   HorizontalTextAlignment="Start" />
+                                                            <Label Text="{Binding AssessmentStartDate, StringFormat='{0:MMMM dd}'}" HorizontalTextAlignment="Start" />
                                                             <Label Text=" - " />
-                                                            <Label Text="{Binding AssessmentEndDate, StringFormat='{0:MMMM dd}'}"
-                                                                   HorizontalTextAlignment="Start" />
+                                                            <Label Text="{Binding AssessmentEndDate, StringFormat='{0:MMMM dd}'}" HorizontalTextAlignment="Start" />
                                                         </StackLayout>
                                                         <Label Text="{Binding AssessmentType}" HorizontalOptions="Center" />
-                                                        <StackLayout Orientation="Horizontal">
-                                                            <Label Text="Notifications Enabled: " HorizontalOptions="Center" VerticalOptions="Center"/>
-                                                            <Switch IsToggled="{Binding AssessmentNotification}" IsEnabled="False" HorizontalOptions="Center" />
-                                                        </StackLayout>
-                                                        
                                                     </StackLayout>
                                                 </Frame>
                                             </Grid>
@@ -102,8 +78,18 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             </ListView>
+                        </ViewCell>
+                    </TableSection>
+
+                </TableRoot>
+            </TableView>
+          
               <StackLayout>
                 <Label x:Name="noAssessmentLabel" Text="No Assessment(s) In This Course" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Padding="20" HorizontalOptions="Center" Text="Add Assessment" Command="{Binding AddAssessmentCommand}" />
+                <Button Padding="20" HorizontalOptions="Center" Text="Delete Course" Command="{Binding RemoveCourseCommand}" />
             </StackLayout>
         </StackLayout>
 

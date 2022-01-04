@@ -10,46 +10,26 @@ namespace WGUPortalv2.ViewModels
 {
     public class TermListViewModel : ViewModelBase
     {
-        public AsyncCommand CourseEditCommand { get; }
+  
         public AsyncCommand RefreshCommand { get; }
-        public AsyncCommand AddCommand { get; }
-        public AsyncCommand<Term> RemoveCommand { get; }
-
+        public AsyncCommand AddTermCommand { get; }
+ 
         public TermListViewModel()
         {
             Term = new ObservableRangeCollection<Term>();
-            
 
-            CourseEditCommand = new AsyncCommand(CourseEdit);
             RefreshCommand = new AsyncCommand(Refresh);
-            AddCommand = new AsyncCommand(Add);
-            RemoveCommand = new AsyncCommand<Term>(Remove);
-        }
-
-        Assessment selectedAssessment;
-        public Assessment SelectedAssessment
-        {
-            get => selectedAssessment;
-            set
-            {
-                if (value != null)
-                {
-                    AssessmentId = value.Id;
-                    var route = $"{nameof(AssessmentDetailsPage)}";
-                    Shell.Current.GoToAsync(route);
-                }
-                selectedAssessment = value;
-                OnPropertyChanged();
-            }
+            AddTermCommand = new AsyncCommand(AddTerm);
         }
 
         Term selectedTerm;
+
         public Term SelectedTerm
         {
             get => selectedTerm;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     TermId = value.Id;
                     var route = $"{nameof(TermDetailsPage)}";
@@ -58,12 +38,6 @@ namespace WGUPortalv2.ViewModels
                 selectedTerm = value;
                 OnPropertyChanged();
             }
-        }
-
-        async Task CourseEdit()
-        {
-            var route = $"{nameof(EditCoursePage)}";
-            await Shell.Current.GoToAsync(route);
         }
 
         async Task Refresh()
@@ -80,13 +54,7 @@ namespace WGUPortalv2.ViewModels
 
         }
 
-        async Task Remove(Term term)
-        {
-            await DatabaseHandler.RemoveTerm(term.Id);
-            await Refresh();
-        }
-
-        async Task Add()
+        async Task AddTerm()
         {
             var route = $"{nameof(AddTermPage)}";
             await Shell.Current.GoToAsync(route);

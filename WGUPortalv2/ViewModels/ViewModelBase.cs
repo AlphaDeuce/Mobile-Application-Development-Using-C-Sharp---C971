@@ -17,12 +17,12 @@ namespace WGUPortalv2.ViewModels
         // Term ViewModel Base Info:
         public ObservableRangeCollection<Term> Term { get; set; }
 
-        private static string termTitle;
-        private static DateTime termStartDate, termEndDate;
+        string termTitle;
+        DateTime termStartDate, termEndDate;
 
-        public static string TermTitle { get => termTitle; set => termTitle = value; }
-        public static DateTime TermStartDate { get => termStartDate; set => termStartDate = value; }
-        public static DateTime TermEndDate { get => termEndDate; set => termEndDate = value; }
+        public string TermTitle { get => termTitle; set => termTitle = value; }
+        public DateTime TermStartDate { get => termStartDate; set => termStartDate = value; }
+        public DateTime TermEndDate { get => termEndDate; set => termEndDate = value; }
 
         // Course ViewModel Base Info:
         public ObservableRangeCollection<Course> Course { get; set; }

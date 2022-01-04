@@ -37,6 +37,9 @@ namespace WGUPortalv2.Views
             CourseNotes.Text = selectedCourse.CourseNotes;
             CourseNotification.On = selectedCourse.CourseNotification;
 
+            assessmentListView.ItemsSource = null;
+            noAssessmentLabel.IsVisible = true;
+
             assessmentList = await DatabaseHandler.GetAssessments(courseId);
             if (assessmentList.Count() > 0)
             {
@@ -44,31 +47,50 @@ namespace WGUPortalv2.Views
                 noAssessmentLabel.IsVisible = false;
                 return;
             }
-
-
         }
 
         async void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
         {
             if (CourseMenuItem.Text == "Edit Course")
             {
-                CourseTable.IsEnabled = true;
+                CourseTitle.IsEnabled = true;
+                CourseStart.IsEnabled = true;
+                CourseEnd.IsEnabled = true;
+                CourseStatus.IsEnabled = true;
+                InstructorName.IsEnabled = true;
+                InstructorPhone.IsEnabled = true;
+                InstructorEmail.IsEnabled = true;
+                CourseStatus.IsEnabled = true;
+                CourseNotes.IsEnabled = true;
+                CourseNotification.IsEnabled = true;
                 CourseMenuItem.Text = "Save Changes";
             }
             else if (CourseMenuItem.Text == "Save Changes")
             {
-                CourseTable.IsEnabled = false;
+                CourseTitle.IsEnabled = false;
+                CourseStart.IsEnabled = false;
+                CourseEnd.IsEnabled = false;
+                CourseStatus.IsEnabled = false;
+                InstructorName.IsEnabled = false;
+                InstructorPhone.IsEnabled = false;
+                InstructorEmail.IsEnabled = false;
+                CourseStatus.IsEnabled = false;
+                CourseNotes.IsEnabled = false;
+                CourseNotification.IsEnabled = false;
                 await DatabaseHandler.UpdateCourse(courseId,
-                    termId,
-                    CourseTitle.Text,
-                    CourseStart.Date,
-                    CourseEnd.Date,
-                    InstructorName.Text,
-                    InstructorPhone.Text,
-                    InstructorEmail.Text,
-                    CourseStatus.SelectedItem.ToString(),
-                    CourseNotes.Text, CourseNotification.On);
+                                                    termId,
+                                                    CourseTitle.Text,
+                                                    CourseStart.Date,
+                                                    CourseEnd.Date,
+                                                    InstructorName.Text,
+                                                    InstructorPhone.Text,
+                                                    InstructorEmail.Text,
+                                                    CourseStatus.SelectedItem.ToString(),
+                                                    CourseNotes.Text,
+                                                    CourseNotification.On);
                 await Shell.Current.DisplayAlert($"{CourseTitle.Text} Updated", null, "OK");
+                CourseMenuItem.Text = "Edit Course";
+                OnAppearing();
             }
 
         }

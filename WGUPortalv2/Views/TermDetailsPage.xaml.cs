@@ -29,6 +29,9 @@ namespace WGUPortalv2.Views
             TermStartDatePicker.Date = selectedTerm.TermStartDate;
             TermEndDatePicker.Date = selectedTerm.TermEndDate;
 
+            courseListView.ItemsSource = null;
+            noCourseLabel.IsVisible = true;
+
             courseList = await DatabaseHandler.GetCourses(termId);
             if (courseList.Count() > 0)
             {
@@ -36,23 +39,23 @@ namespace WGUPortalv2.Views
                 noCourseLabel.IsVisible = false;
                 return;
             }
-
-            
         }
 
         async void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
         {
             if (TermMenuItem.Text == "Edit Term")
             {
-                TermTable.IsEnabled = true;
-
+                TermTitleLabel.IsEnabled = true;
+                TermStartDatePicker.IsEnabled = true;
+                TermEndDatePicker.IsEnabled = true;
                 TermMenuItem.Text = "Save Changes";
 
             }
             else if (TermMenuItem.Text == "Save Changes")
             {
-
-                TermTable.IsEnabled = false;
+                TermTitleLabel.IsEnabled = false;
+                TermStartDatePicker.IsEnabled = false;
+                TermEndDatePicker.IsEnabled = false;
                 await DatabaseHandler.UpdateTerm(termId,
                                                 TermTitleLabel.Text,
                                                 TermStartDatePicker.Date,

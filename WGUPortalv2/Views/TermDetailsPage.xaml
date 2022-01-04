@@ -15,71 +15,55 @@
                         
             <TableView Intent="Data"
                        HasUnevenRows="True"
-                       x:Name="TermTable"
-                       IsEnabled="False">
+                       x:Name="TermTable" >
                 <TableRoot>
                     <TableSection Title="Term Information">
-
-                        <EntryCell x:Name="TermTitleLabel"
-                                   Label="Term Title: "
-                                   Placeholder="Number or Title"
-                                   HorizontalTextAlignment="Center"
-                                   />
-
+                        <EntryCell x:Name="TermTitleLabel" Label="Term Title: " Placeholder="Number or Title" HorizontalTextAlignment="Center" IsEnabled="False"/>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="18,0">
                                 <Label Text="Start Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="TermStartDatePicker"
-                                    Format="D" />
+                                <DatePicker x:Name="TermStartDatePicker" IsEnabled="False" Format="D" />
                             </StackLayout>
                         </ViewCell>
-
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20, 0">
                                 <Label Text="  End Date: " VerticalTextAlignment="Center" />
-                                <DatePicker x:Name="TermEndDatePicker"
-                                    Format="D"  />
+                                <DatePicker x:Name="TermEndDatePicker" IsEnabled="False" Format="D"  />
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="Course(s)">
-
+                        <ViewCell>
+                            <ListView SelectionMode="Single" CachingStrategy="RecycleElement" x:Name="courseListView" HasUnevenRows="True" SeparatorVisibility="None" SelectedItem="{Binding SelectedCourse}" IsEnabled="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                                <Grid Padding="10">
+                                                   <Frame CornerRadius="20">
+                                                        <StackLayout> 
+                                                            <Label Text="{Binding CourseTitle}" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                                                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                                                <Label Text="{Binding CourseStartDate, StringFormat='{0:MMMM dd}'}" HorizontalTextAlignment="Start" />
+                                                                <Label Text=" - " />
+                                                                <Label Text="{Binding CourseEndDate, StringFormat='{0:MMMM dd}'}" HorizontalTextAlignment="Start" />
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </Grid>
+                                          </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </ViewCell>
                     </TableSection>
                 </TableRoot>
             </TableView>
-                                         
-                            <ListView SelectionMode="Single"
-                                      CachingStrategy="RecycleElement"
-                                      x:Name="courseListView"
-                                      HasUnevenRows="True"
-                                      SeparatorVisibility="None"
-                                      SelectedItem="{Binding SelectedCourse}"
-                                      IsEnabled="True">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                            <Grid Padding="10">
-                                               <Frame CornerRadius="20">
-                                                    <StackLayout>
-                                                        <Label Text="{Binding CourseTitle}" FontAttributes="Bold"
-                                                               HorizontalTextAlignment="Center" />
-                                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                                            <Label Text="{Binding CourseStartDate, StringFormat='{0:MMMM dd}'}"
-                                                                   HorizontalTextAlignment="Start" />
-                                                            <Label Text=" - " />
-                                                            <Label Text="{Binding CourseEndDate, StringFormat='{0:MMMM dd}'}"
-                                                                   HorizontalTextAlignment="Start" />
-                                                        </StackLayout>
-                                                    </StackLayout>
-                                                </Frame>
-                                            </Grid>
-                                      </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            </ListView>
-                        
-            <StackLayout>
+            <StackLayout VerticalOptions="Start">
                 <Label x:Name="noCourseLabel" Text="No Course(s) In This Term" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Padding="20" HorizontalOptions="Center" Text="Add Course" Command="{Binding AddCourseCommand}" />
+                <Button Padding="20" HorizontalOptions="Center" Text="Delete Term" Command="{Binding RemoveTermCommand}" />
             </StackLayout>
    </StackLayout>
 </ContentPage>
